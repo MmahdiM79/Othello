@@ -1,7 +1,10 @@
 
 /**
+ * This class repersent a person.
+ * it holds the name, and gender of the person
+ * 
  * @author Mohammad Mahdi Malmasi
- * @version 0.0.1
+ * @version 0.1.0
  */
 public class Person
 {
@@ -16,6 +19,9 @@ public class Person
 
     // the age of the person
     private int age;
+
+    // the gender of the person
+    private String gender;
     
 
 
@@ -25,11 +31,12 @@ public class Person
     
           /* Constructor */
     
-    public Person(String firstName, String lastName, int age)
+    public Person(String firstName, String lastName, int age, String gender)
     {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
+        this.gender = gender;
     }
 
 
@@ -48,22 +55,33 @@ public class Person
      * set the first name of the person
      * @param firstName : the first name of the person
      */
-    public void setFirstName(String firstName) {
+    public void setFirstName(String firstName) 
+    {
         this.firstName = firstName;
     }
     /**
      * set the last name of the person
      * @param lastName : the last name of the person
      */
-    public void setLastName(String lastName) {
+    public void setLastName(String lastName) 
+    {
         this.lastName = lastName;
     }
     /**
      * set the age of the person
      * @param age : the age of the person
      */
-    public void setAge(int age) {
+    public void setAge(int age) 
+    {
         this.age = age;
+    }
+    /**
+     * set the gender of the person
+     * @param gender : the gender of the person to set
+     */
+    public void setGender(String gender) 
+    {
+        this.gender = gender;
     }
     
 
@@ -90,8 +108,25 @@ public class Person
     {
         return age;
     }
+    /**
+     * @return the gender of the person
+     */
+    public String getGender() 
+    {
+        return gender;
+    }
     
 
+
+
+    /**
+     * This method make a {@code String} of the person fields and their value
+     * 
+     * @return a string of the person details
+     * 
+     * @see an example of output:
+     * @see .Person first name: Mohammad Mahdi,  Person last name:  Malmasi,  Person age: 19,  Person gender: male.
+     */
     @Override
     public String toString()
     {
@@ -99,9 +134,17 @@ public class Person
                 +
                "Person last name: " + lastName + ",  "
                 +
-               "Person age: " + age + ".\n";
+               "Person age: " + age + ",  "
+                +
+               "Person gender: " + gender + ".\n";
     }
 
+
+    /**
+     * This method shows the person details in standarad output (terminal)
+     * 
+     * @see Person#toString()
+     */
     public void print()
     {
         System.out.println(this.toString());
