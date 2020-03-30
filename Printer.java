@@ -43,8 +43,23 @@ public class Printer
 
     public static void printVisualBoard(char[][] visualBoard, int y_len, int x_len)
     {
+        System.out.print("   ");
+
+        for (char k = 'A'; k <= 'H'; k++)
+            System.out.print(YELLOW_BRIGHT + k + "      ");
+
+        System.out.print("\n");
+
+
+
         for (int j = 0; j < y_len; j++)
         {
+            if (j%4 == 2)
+                System.out.print(YELLOW_BRIGHT + (j/4 + 1) + " " + RESET);
+            else
+                System.err.print("  ");
+
+
             for (int i = 0; i < x_len; i++)
             {
                 if (visualBoard[j][i] == '•' || visualBoard[j][i] == '-' || visualBoard[j][i] == '|')
@@ -52,7 +67,7 @@ public class Printer
 
                 else if (visualBoard[j][i] == 'X')
                     System.out.print(RED_BACKGROUND_BRIGHT + " ");
-
+ 
                 else if (visualBoard[j][i] == 'O')
                     System.out.print(CYAN_BACKGROUND_BRIGHT + " ");
 
