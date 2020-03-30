@@ -32,10 +32,61 @@ public class Board implements BoardActs
     private int[][] board;
 
 
+
+
+
+          /* Constructor */
+
     public Board()
     {
         visualBoard = new char[VISUAL_BOARD_Y][VISUAL_BOARD_X];
         makeVisualBoard();
+
+        applyToVisualBoard(3, 3, 'X');
+        applyToVisualBoard(4, 4, 'X');
+
+        applyToVisualBoard(3, 4, 'O');
+        applyToVisualBoard(4, 3, 'O');
+
+    }
+
+
+
+            /* Methods */
+
+    /**
+     * @return the visualBoard
+     */
+    public char[][] getVisualBoard() 
+    {
+        return visualBoard;
+    }
+    /**
+     * @return the vISUAL_BOARD_X
+     */
+    public int getVisualX() 
+    {
+        return VISUAL_BOARD_X;
+    }
+    /**
+     * @return the vISUAL_BOARD_Y
+     */
+    public int getVisualY() 
+    {
+        return VISUAL_BOARD_Y;
+    }
+
+
+    private void applyToVisualBoard(int y, int x, char player)
+    {
+        y = (4 * y) + 1;
+        x = (7 * x) + 1;
+
+        for (int j = 0; j < 3; j++)
+        {
+            for (int i = 0; i < 6; i++)
+                visualBoard[y+j][x+i] = player;
+        }
     }
 
 
