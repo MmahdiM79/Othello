@@ -12,17 +12,6 @@ public class Printer
     // Reset the color of the terminal
    private static final String RESET = "\033[0m"; 
 
-    
-    // Underline
-   private static final String BLACK_UNDERLINED = "\033[4;30m"; 
-   private static final String RED_UNDERLINED = "\033[4;31m"; 
-   private static final String GREEN_UNDERLINED = "\033[4;32m"; 
-   private static final String YELLOW_UNDERLINED = "\033[4;33m"; 
-   private static final String BLUE_UNDERLINED = "\033[4;34m"; 
-   private static final String PURPLE_UNDERLINED = "\033[4;35m"; 
-   private static final String CYAN_UNDERLINED = "\033[4;36m"; 
-   private static final String WHITE_UNDERLINED = "\033[4;37m"; 
-
 
     // Text colors
    private static final String BLACK_BRIGHT = "\033[90m";  
@@ -49,7 +38,9 @@ public class Printer
 
 
 
-   
+
+            /* Methods */
+
     public static void printVisualBoard(char[][] visualBoard, int y_len, int x_len)
     {
         for (int j = 0; j < y_len; j++)
@@ -57,9 +48,18 @@ public class Printer
             for (int i = 0; i < x_len; i++)
             {
                 if (visualBoard[j][i] == '•' || visualBoard[j][i] == '-' || visualBoard[j][i] == '|')
-                    System.out.print(RED_BACKGROUND_BRIGHT + YELLOW_BRIGHT + visualBoard[j][i] + RESET);
+                    System.out.print(GREEN_BRIGHT  + visualBoard[j][i]);
+
+                else if (visualBoard[j][i] == 'X')
+                    System.out.print(RED_BACKGROUND_BRIGHT + " ");
+
+                else if (visualBoard[j][i] == 'O')
+                    System.out.print(CYAN_BACKGROUND_BRIGHT + " ");
+
                 else
                     System.out.print(visualBoard[j][i]);
+
+                System.out.print(RESET);
             }
 
             System.out.print("\n");
