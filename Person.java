@@ -1,7 +1,7 @@
 
 /**
  * @author Mohammad Mahdi Malmasi
- * @version 0.0.0
+ * @version 0.0.1
  */
 public class Person
 {
@@ -89,6 +89,22 @@ public class Person
     public int getAge() 
     {
         return age;
+    }
+    
+
+    @Override
+    public String toString()
+    {
+        return "Person first name: " + firstName + ",  "
+                +
+               "Person last name: " + lastName + ",  "
+                +
+               "Person age: " + age + ".\n";
+    }
+
+    public void print()
+    {
+        System.out.println(this.toString());
     }
 }
 
