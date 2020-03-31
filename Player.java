@@ -2,7 +2,7 @@
 
 /**
  * @author Mohammad Mahdi Malmasi
- * @version 0.0.0
+ * @version 0.0.2
  */
 public class Player extends Person
 {
@@ -57,7 +57,7 @@ public class Player extends Person
      * set the ID of the player
      * @param playerID : the ID of palyer to set
      */
-    public void setPlayerID(String playerID) 
+    public void setPlayerID(int playerID) 
     {
         this.playerID = playerID;
     }
@@ -83,7 +83,7 @@ public class Player extends Person
     /**
      * @return : the ID of the player
      */
-    public String getPlayerID() 
+    public int getPlayerID() 
     {
         return playerID;
     }
