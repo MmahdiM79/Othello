@@ -1,12 +1,11 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import jdk.nashorn.internal.ir.Block;
 
 
 /**
  * @author Mohammad Mahdi Malmasi
- * @version 0.0.9
+ * @version 0.0.10
  */
 public class Rules
 {
@@ -195,77 +194,123 @@ public class Rules
         return playersSelectableBlocks.get(player).contains(choosenBlock);
     }
 
-     public static applyChoose(Board gameBoard, int player, String choosenBlock)
-     {  
-        int y = (int)choosenBlock.charAt(0) - 1;
-        int x = (int)choosenBlock.charAt(1) - 65;
+    private static int deCode(String choosenBlock, char which)
+    {
+        switch (which)
+        {
+            case 'X':
+                return (int)choosenBlock.charAt(1) - 65;
+
+            case 'Y':
+                switch (choosenBlock.charAt(0))
+                {
+                    case '1':
+                        return 0;
+
+                    case '2':
+                        return 1;
+
+                    case '3':
+                        return 2;
+
+                    case '4':
+                        return 3;
+
+                    case '5':
+                        return 4;
+
+                    case '6':
+                        return 5;
+
+                    case '7':
+                        return 6;
+
+                    case '8':
+                        return 7;
+                }
+        }
+
+        return -1;
+    }
+
+    public static void applyChoose(Board gameBoard, int player, String choosenBlock)
+    {  
+        int y = deCode(choosenBlock, 'Y');
+        int x = deCode(choosenBlock, 'X');
+
+        System.out.println(y + " " + x);
 
         gameBoard.changeBoard(y, x, player);
 
 
         int j = 0, i = 0;
 
-        j = -1, i = 0;
+        j = -1;
+        i = 0;
         while (gameBoard.getMainBoard()[y+j][x+i] == (-player))
         {
             gameBoard.changeBoard(y+j, x+i, player);
             j--;
         }
 
-        j = -1, i = 0;
+        j = 1;
+        i = 0;
         while (gameBoard.getMainBoard()[y+j][x+i] == (-player))
         {
             gameBoard.changeBoard(y+j, x+i, player);
-            j--;
+            j++;
         }
 
-        j = -1, i = 0;
+        j = 0;
+        i = -1;
         while (gameBoard.getMainBoard()[y+j][x+i] == (-player))
         {
             gameBoard.changeBoard(y+j, x+i, player);
-            j--;
+            i--;
         }
 
-        j = -1, i = 0;
+        j = 0;
+        i = 1;
         while (gameBoard.getMainBoard()[y+j][x+i] == (-player))
         {
             gameBoard.changeBoard(y+j, x+i, player);
-            j--;
+            i++;
         }
 
-        j = -1, i = 0;
+        j = -1;
+        i = -1;
         while (gameBoard.getMainBoard()[y+j][x+i] == (-player))
         {
             gameBoard.changeBoard(y+j, x+i, player);
             j--;
+            i--;
         }
 
-        j = -1, i = 0;
+        j = 1;
+        i = 1;
         while (gameBoard.getMainBoard()[y+j][x+i] == (-player))
         {
             gameBoard.changeBoard(y+j, x+i, player);
-            j--;
+            j++;
+            i++;
         }
 
-        j = -1, i = 0;
+        j = -1;
+        i = 1;
         while (gameBoard.getMainBoard()[y+j][x+i] == (-player))
         {
             gameBoard.changeBoard(y+j, x+i, player);
             j--;
+            i++;
         }
 
-        j = -1, i = 0;
+        j = 1;
+        i = -1;
         while (gameBoard.getMainBoard()[y+j][x+i] == (-player))
         {
             gameBoard.changeBoard(y+j, x+i, player);
-            j--;
-        }
-
-        j = -1, i = 0;
-        while (gameBoard.getMainBoard()[y+j][x+i] == (-player))
-        {
-            gameBoard.changeBoard(y+j, x+i, player);
-            j--;
+            j++;
+            i--;
         }
      }
 }
