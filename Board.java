@@ -7,7 +7,7 @@
  * 
  * 
  * @author Mohammad Mahdi Malmasi
- * @version 0.1.0
+ * @version 0.1.1
  */
 public class Board
 {
@@ -24,12 +24,16 @@ public class Board
     private final int VISUAL_BOARD_Y = (BOARD_Y * 4) + 1;
 
 
+
     // this array will be showen in standard output (terminal).
     // X: player 1 -> red color,  O: player 2 -> cyan color
     private char[][] visualBoard; 
 
     // this array is for perform calculations and decisions
-    // 1 refers to player1 (X: Red),  -1 refers to player2 (O: Cyan),  0 refers to a empty block
+    // 1 refers to player1 (X: Red) 
+    // -1 refers to player2 (O: Cyan)  
+    // 0 refers to a empty block
+    // 2 refers to a selectable block
     private int[][] mainBoard;
 
 
@@ -123,6 +127,10 @@ public class Board
 
             case -1:
                 player = 'O';
+            break;
+
+            case 2:
+                player = 'W';
             break;
 
             default:
