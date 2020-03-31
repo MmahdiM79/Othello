@@ -59,132 +59,148 @@ public class Rules
 
     private static void selectBlock(Board gameBoard, int y, int x, int player)
     {
-        for (int j = -2; 0 <= y+j; j--)
+        for (int j = -1, len = 0; 0 <= y+j; j--)
         {
             if (gameBoard.getMainBoard()[y+j][x] == 0)
                 break;
 
             else if (gameBoard.getMainBoard()[y+j][x] == player)
             {
+                if (len == 0)
+                    break;
+                
                 playersSelectableBlocks.get(player).add("" + (y+1) + ((char) (x+65)));
                 gameBoard.changeBoard(y, x, 2);
                 return;
             }
 
-            else
-                continue;
+            len++;
         }
 
-        for (int j = 2 ; y+j < 8; j++)
+        for (int j = 1, len = 0; y+j < 8; j++)
         {
             if (gameBoard.getMainBoard()[y+j][x] == 0)
                 break;
 
             else if (gameBoard.getMainBoard()[y+j][x] == player)
             {
+                if (len == 0)
+                    break;
+                
                 playersSelectableBlocks.get(player).add("" + (y+1) + ((char) (x+65)));
                 gameBoard.changeBoard(y, x, 2);
                 return;
             }
 
-            else
-                continue;
+            len++;
         }
 
-        for (int i = -2; 0 <= x+i; i--)
+        for (int i = -1, len = 0; 0 <= x+i; i--)
         {
             if (gameBoard.getMainBoard()[y][x+i] == 0)
                 break;
 
             else if (gameBoard.getMainBoard()[y][x+i] == player)
             {
+                if (len == 0)
+                    break;
+                
                 playersSelectableBlocks.get(player).add("" + (y+1) + ((char) (x+65)));
                 gameBoard.changeBoard(y, x, 2);
                 return;
             }
 
-            else
-                continue;
+            len++;
         }
 
-        for (int i = 2; x+i < 8; i++)
+        for (int i = 1, len = 0; x+i < 8; i++)
         {
             if (gameBoard.getMainBoard()[y][x+i] == 0)
                 break;
 
             else if (gameBoard.getMainBoard()[y][x+i] == player)
             {
+                if (len == 0)
+                    break;
+                
                 playersSelectableBlocks.get(player).add("" + (y+1) + ((char) (x+65)));
                 gameBoard.changeBoard(y, x, 2);
                 return;
             }
 
-            else
-                continue;
+            len++;
         }
 
-        for (int j = 2, i = 2; (y+j < 8)&&(x+i < 8); j++, i++)
+        for (int j = 1, i = 1, len = 0; (y+j < 8)&&(x+i < 8); j++, i++)
         {
             if (gameBoard.getMainBoard()[y+j][x+i] == 0)
                 break;
 
             else if (gameBoard.getMainBoard()[y+j][x+i] == player)
             {
+                if (len == 0)
+                    break;
+                
                 playersSelectableBlocks.get(player).add("" + (y+1) + ((char) (x+65)));
                 gameBoard.changeBoard(y, x, 2);
                 return;
             }
 
-            else
-                continue;
+            len++;
         }
 
-        for (int j = -2, i = -2; (0 <= y+j)&&(0 <= x+i); j--, i--)
+        for (int j = -1, i = -1, len = 0; (0 <= y+j)&&(0 <= x+i); j--, i--)
         {
             if (gameBoard.getMainBoard()[y+j][x+i] == 0)
                 break;
 
             else if (gameBoard.getMainBoard()[y+j][x+i] == player)
             {
+                if (len == 0)
+                    break;
+                
                 playersSelectableBlocks.get(player).add("" + (y+1) + ((char) (x+65)));
                 gameBoard.changeBoard(y, x, 2);
                 return;
             }
 
-            else
-                continue;
+            len++;
         }
 
-        for (int j = -2, i = 2; (0 <= y+j)&&(x+i < 8); j--, i++)
+        for (int j = -1, i = 1, len = 0; (0 <= y+j)&&(x+i < 8); j--, i++)
         {
             if (gameBoard.getMainBoard()[y+j][x+i] == 0)
                 break;
 
             else if (gameBoard.getMainBoard()[y+j][x+i] == player)
             {
+                if (len == 0)
+                    break;
+                
                 playersSelectableBlocks.get(player).add("" + (y+1) + ((char) (x+65)));
                 gameBoard.changeBoard(y, x, 2);
                 return;
             }
 
-            else
-                continue;
+            len++;
         }
 
-        for (int j = 2, i = -2; (y+j < 8)&&(0 <= x+i); j++, i--)
+        for (int j = 1, i = -1, len = 0; (y+j < 8)&&(0 <= x+i); j++, i--)
         {
             if (gameBoard.getMainBoard()[y+j][x+i] == 0)
                 break;
 
             else if (gameBoard.getMainBoard()[y+j][x+i] == player)
             {
+                if (len == 0)
+                    break;
+                
                 playersSelectableBlocks.get(player).add("" + (y+1) + ((char) (x+65)));
                 gameBoard.changeBoard(y, x, 2);
                 return;
             }
 
-            else
-                continue;
+           len++;
         }
     }
 
