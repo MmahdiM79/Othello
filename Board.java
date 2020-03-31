@@ -7,7 +7,7 @@
  * 
  * 
  * @author Mohammad Mahdi Malmasi
- * @version 0.1.2
+ * @version 0.1.3
  */
 public class Board
 {
@@ -137,6 +137,18 @@ public class Board
                 player = ' ';
         }
         applyToVisualBoard(y, x, player);
+    }
+
+
+    /**
+     * This method remve the white blocks from the board
+     */
+    public void reset()
+    {
+        for (int j = 0; j < 8; j++)
+            for (int i = 0; i < 8; i++)
+                if (mainBoard[j][i] == 2)
+                    changeBoard(j, i, 0);
     }
 
 
