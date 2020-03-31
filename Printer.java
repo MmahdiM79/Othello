@@ -1,7 +1,9 @@
+import java.util.Scanner;
+
 
 /**
  * @author Mohammad Mahdi Malmsi
- * @version 0.0.2
+ * @version 0.0.4
  */
 public class Printer
 {
@@ -11,6 +13,9 @@ public class Printer
 
     // Reset the color of the terminal
    private static final String RESET = "\033[0m"; 
+
+   // indent
+   private static final String indent = "\t\t\t\t  ";
 
 
     // Text colors
@@ -41,10 +46,20 @@ public class Printer
 
             /* Methods */
 
+    /**
+     * This method print the visual board in standard output(termianl)
+     * Run this code in an Unix-base OS to see it colorfull =)
+     * 
+     * @param visualBoard : the visual board of the game
+     * @param y_len : the width of the visual board
+     * @param x_len : the lenght of the visual board
+     */
     public static void printVisualBoard(char[][] visualBoard, int y_len, int x_len)
     {
-        System.out.print("   ");
+        System.out.print(indent);
 
+
+        System.out.print("      ");
         for (char k = 'A'; k <= 'H'; k++)
             System.out.print(YELLOW_BRIGHT + k + "      ");
 
@@ -54,6 +69,9 @@ public class Printer
 
         for (int j = 0; j < y_len; j++)
         {
+            System.out.print(indent);
+            
+
             if (j%4 == 2)
                 System.out.print(YELLOW_BRIGHT + (j/4 + 1) + " " + RESET);
             else
@@ -79,5 +97,23 @@ public class Printer
 
             System.out.print("\n");
         }
+    }
+
+
+    public static void printWrongChoose(Scanner finish)
+    {
+        System.out.println(indent + 
+                            "\t     " + 
+                                YELLOW_BACKGROUND_BRIGHT + 
+                                    RED_BRIGHT + "<@ ! YOU CAN NOT CHOOSE THAT BLOCK ! @>" + RESET);
+
+        System.out.println(indent + "\t\t    " + "(press enter to continue)");
+        finish.nextLine();
+    }
+
+
+    public static void printTurn(Player player)
+    {
+        System.out.print("Hey " + player.getFirstName() + " it's your turn. choose a block: ");
     }
 }
