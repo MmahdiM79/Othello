@@ -7,7 +7,7 @@
  * 
  * 
  * @author Mohammad Mahdi Malmasi
- * @version 0.1.1
+ * @version 0.1.2
  */
 public class Board
 {
@@ -57,11 +57,11 @@ public class Board
         visualBoard = new char[VISUAL_BOARD_Y][VISUAL_BOARD_X];
         makeVisualBoard();
 
-        applyToVisualBoard(3, 3, 'X');
-        applyToVisualBoard(4, 4, 'X');
+        changeBoard(3, 3, 1);
+        changeBoard(4, 4, 1);
 
-        applyToVisualBoard(3, 4, 'O');
-        applyToVisualBoard(4, 3, 'O');
+        changeBoard(3, 4, -1);
+        changeBoard(4, 3, -1);
     }
 
 
@@ -134,7 +134,7 @@ public class Board
             break;
 
             default:
-                player = ' '
+                player = ' ';
         }
         applyToVisualBoard(y, x, player);
     }
