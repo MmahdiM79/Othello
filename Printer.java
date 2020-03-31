@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 /**
  * @author Mohammad Mahdi Malmsi
- * @version 0.0.5
+ * @version 0.0.7
  */
 public class Printer
 {
@@ -90,7 +90,7 @@ public class Printer
                     System.out.print(CYAN_BACKGROUND_BRIGHT + " ");
 
                 else if (visualBoard[j][i] == 'W')
-                    System.err.println(WHITE_BACKGROUND_BRIGHT + " ");
+                    System.err.print(WHITE_BACKGROUND_BRIGHT + " ");
 
                 else
                     System.out.print(visualBoard[j][i]);
@@ -118,5 +118,27 @@ public class Printer
     public static void printTurn(Player player)
     {
         System.out.print("Hey " + player.getFirstName() + " it's your turn. choose a block: ");
+    }
+
+    public static void printMenu()
+    {
+        clear();
+
+        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println(indent + "\t\t  " + "🔵 <@~~~ Othello Game ~~~@> 🔴");
+        System.out.print("\n\n");
+        System.out.println(indent + "\t\t  " + "    1. new Two Player game");
+        System.out.println(indent + "\t\t  " + "   2. new Single Player game");
+        System.out.println(indent + "\t\t  " + "        3. game Rules");
+        System.out.println(indent + "\t\t  " + "            4. help");
+        System.out.print("\n");
+        System.out.println(indent + "\t\t  " + "            5. exit");
+        System.err.println(indent + "\t\t  " + "🔴 <@~~~~~~~~~~~~~~~~~~~~~@> 🔵");
+    }
+
+    private static void clear()
+    {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }
