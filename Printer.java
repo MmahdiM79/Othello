@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 /**
  * @author Mohammad Mahdi Malmsi
- * @version 0.0.4
+ * @version 0.0.5
  */
 public class Printer
 {
@@ -88,6 +88,9 @@ public class Printer
  
                 else if (visualBoard[j][i] == 'O')
                     System.out.print(CYAN_BACKGROUND_BRIGHT + " ");
+
+                else if (visualBoard[j][i] == 'W')
+                    System.err.println(WHITE_BACKGROUND_BRIGHT + " ");
 
                 else
                     System.out.print(visualBoard[j][i]);
