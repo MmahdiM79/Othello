@@ -12,7 +12,7 @@ public class Player extends Person
     private int score;
 
     // the id of the player in the game
-    private String playerID;
+    private int playerID;
 
     // the character of the player
     private char playerCharacter;
@@ -25,9 +25,9 @@ public class Player extends Person
 
           /* Constructor */
 
-    public Player(String firstName, String lastName, int age, String playerID, char playerCharacter)
+    public Player(String firstName, String lastName, int age, int playerID, char playerCharacter, String gender)
     {
-        super(firstName, lastName, age);
+        super(firstName, lastName, age, gender);
 
         this.score = 0;
         this.playerID = playerID;
