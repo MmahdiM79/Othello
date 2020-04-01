@@ -182,6 +182,7 @@ public class Run
 
                     // show the winner
                     Printer.printVisualBoard(gameBoard.getVisualBoard(), gameBoard.getVisualY(), gameBoard.getVisualX());
+                    Printer.printPlayersScores(player1, player2);
                     Rules.winner(player1, player2, inputs);
 
                 break;
@@ -266,6 +267,7 @@ public class Run
 
                     // show the winner
                     Printer.printVisualBoard(gameBoard.getVisualBoard(), gameBoard.getVisualY(), gameBoard.getVisualX());
+                    Printer.printPlayersScores(player1, player2);
                     Rules.winner(player1, player2, inputs);
 
                 break;
