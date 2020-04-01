@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 /**
  * @author Mohammad Mahdi Malmasi
- * @version 0.0.10
+ * @version 0.0.12
  */
 public class Rules
 {
@@ -172,7 +172,7 @@ public class Rules
 
                 j = J; 
                 i = I;
-                while(isInRange(y+j, x+i))
+                while(isInRange(y+j, x+i) && gameBoard.getMainBoard()[y+j][x+i] == (-player))
                 {
                     System.out.println("in while");
 
@@ -210,25 +210,36 @@ public class Rules
 
         
         return gainedScore;
-     }
+    }
 
-     public static boolean isGameEnded(Board gameBoard)
-     {
-         findSelectableBlocks(gameBoard, 1);
-         gameBoard.reset();
 
-         findSelectableBlocks(gameBoard, -1);
-         gameBoard.reset();
+    public static boolean isPassed(Player player)
+    {
+        if (playersSelectableBlocks.get(player.getPlayerID()).size() == 0)
+            return true;
+
+    //  else
+            return false;
+    }
+
+
+    public static boolean isGameEnded(Board gameBoard)
+    {
+        findSelectableBlocks(gameBoard, 1);
+        gameBoard.reset();
+
+        findSelectableBlocks(gameBoard, -1);
+        gameBoard.reset();
 
 
 
         int check = playersSelectableBlocks.get(1).size() + playersSelectableBlocks.get(-1).size();
         reset(1);
         reset(-1);
-    
+
         if (check == 0)
             return true;
 
         return false;
-     }
+    }
 }
