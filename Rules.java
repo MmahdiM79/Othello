@@ -1,32 +1,54 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 
 
 /**
+ * This class is Monitoring on the enforcement of game rules
+ * 
  * @author Mohammad Mahdi Malmasi
- * @version 0.0.12
+ * @version 0.1.0
  */
 public class Rules
 {
-            /* Feilds */
-
-    
+    // the players selectable blocks
     private static HashMap<Integer, ArrayList<String>> playersSelectableBlocks = new HashMap<>();
 
 
+
+
+            /* Methods */
+
+
+    /**
+     * This method make a new HashMap Object for this class feild
+     */ 
     public static void initialization()
     {
         playersSelectableBlocks.put(1, new ArrayList<String>());
         playersSelectableBlocks.put(-1, new ArrayList<String>());
     }
     
+
+    /**
+     * This method reset the player selectable blocks
+     * 
+     * @param player
+     */
     public static void reset(int player)
     {
         playersSelectableBlocks.remove(player);
         playersSelectableBlocks.put(player, new ArrayList<String>());
     }
 
+
+    /**
+     * This method find the player selectable blocks
+     * 
+     * @param gameBoard : the board of the game
+     * @param player
+     */
     public static void findSelectableBlocks(Board gameBoard, int player)
     {
         for (int j = 0; j < 8; j++)
@@ -50,6 +72,8 @@ public class Rules
     }
 
 
+    // this method check around a block
+    // it returns true if there is at least a empty block
     private static boolean isEmptyAround(Board gameBoard, int y, int x)
     {
         for (int j = -1; j < 2; j++)
@@ -66,7 +90,7 @@ public class Rules
     }
 
 
-
+    // this methed select the player selectable blocks
     private static void selectBlock(Board gameBoard, int y, int x, int player)
     {
         int increasement_j, increasement_i;
@@ -88,7 +112,6 @@ public class Rules
                             break;
                         
                         playersSelectableBlocks.get(player).add("" + (y+1) + ((char) (x+65)));
-                        System.out.println("" + (y+1) + ((char) (x+65)));
                         gameBoard.changeBoard(y, x, 2);
                         return;
                     }
@@ -99,12 +122,21 @@ public class Rules
     }
 
 
+    /**
+     * This method checks whether a player's move is possible
+     * 
+     * @param player 
+     * @param choosenBlock : the player choosen block
+     * 
+     * @return {@code true} if the player can choose the given block
+     */
     public static boolean isPossible(int player, String choosenBlock)
     {
-        System.out.println(playersSelectableBlocks.get(player).toString());
         return playersSelectableBlocks.get(player).contains(choosenBlock);
     }
 
+
+    // this method 
     private static int deCode(String choosenBlock, char which)
     {
         switch (which)
@@ -144,11 +176,23 @@ public class Rules
         return -1;
     }
 
+
+    // this method chacks to see if the givren Coordinates are is in range
     private static boolean isInRange(int y, int x)
     {
         return ((y < 8 && x < 8) && (0 <= y && 0 <= x));
     }
 
+
+    /**
+     * This method does the chosen player choosen move
+     * 
+     * @param gameBoard : the board game
+     * @param player
+     * @param choosenBlock : the player choosen block
+     * 
+     * @return the player gained score of this move
+     */
     public static int applyChoose(Board gameBoard, int player, String choosenBlock)
     {  
         int gainedScore = 0;
@@ -174,8 +218,6 @@ public class Rules
                 i = I;
                 while(isInRange(y+j, x+i) && gameBoard.getMainBoard()[y+j][x+i] == (-player))
                 {
-                    System.out.println("in while");
-
                     j += increasement_j;
                     i += increasement_i;
 
@@ -184,7 +226,6 @@ public class Rules
 
                     if (gameBoard.getMainBoard()[y+j][x+i] == player)
                     {
-                        System.out.println(j + " " + i);
                         check = true;
                         break;
                     }
@@ -213,6 +254,12 @@ public class Rules
     }
 
 
+    /**
+     * This method check that the given player can choose any block or not 
+     * 
+     * @param player
+     * @return {@code false} if the player can't choose any block
+     */
     public static boolean isPassed(Player player)
     {
         if (playersSelectableBlocks.get(player.getPlayerID()).size() == 0)
@@ -223,6 +270,12 @@ public class Rules
     }
 
 
+    /**
+     * This method check that the game is ended or not
+     * 
+     * @param gameBoard : the board of the game
+     * @return {@code ture} if the game was ended
+     */
     public static boolean isGameEnded(Board gameBoard)
     {
         findSelectableBlocks(gameBoard, 1);
@@ -241,5 +294,28 @@ public class Rules
             return true;
 
         return false;
+    }
+
+
+    /**
+     * This method determine the winner
+     * 
+     * @param player1 
+     * @param player2
+     * @param finish : the plyers input source
+     */
+    public static void winner(Player player1, Player player2, Scanner finish)
+    {
+        if (player1.getScore() > player2.getScore())
+            Printer.printWinner(player1, finish);
+
+        else if (player1.getScore() < player2.getScore())
+            Printer.printWinner(player2, finish);
+
+        else 
+        {
+            Printer.printWinner(player1, finish);
+            Printer.printWinner(player2, finish);
+        }
     }
 }
