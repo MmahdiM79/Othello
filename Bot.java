@@ -1,14 +1,28 @@
 import java.util.HashMap;
 
+
 /**
+ * This class is a simple bot that play insted player 2
+ * 
+ * 
  * @author Mohammad Mahdi Malmasi
- * @version 0.0.0
+ * @version 0.1.0
  */
 public class Bot extends Player
 {
-
+    // the blocks that bot can choose
+    // rank is an int that make difrence between selectable blocks
+    // the bot will chose the higher rank
     private HashMap<String, Integer> whiteBlocksRank;
 
+
+
+
+
+            /* Constructor */
+    /**
+     * Creat a new bot
+     */
     public Bot()
     {
         super("BOT", "", 0, -1, 'O', "");
@@ -16,6 +30,13 @@ public class Bot extends Player
         whiteBlocksRank = new HashMap<>();
     }
 
+
+
+
+
+
+    // thie method converts the i,j to string
+    // example: (3, 4) >>> "5D"
     private String makeCode(int y, int x)
     {
         char X = '\0';
@@ -57,6 +78,9 @@ public class Bot extends Player
         return "" + (y+1) + X;
     }
     
+
+    // this method converts string to i,j
+    // example: "5D" >>> (3, 4)
     private int deCode(String choosenBlock, char which)
     {
         switch (which)
@@ -96,18 +120,17 @@ public class Bot extends Player
         return -1;
     }
 
+
+    // this method find the select able blocks
     private void findWhiteBlocks(Board gameBoard)
     {
-        gameBoard.reset();
-
-        Rules.reset(-1);
-        Rules.findSelectableBlocks(gameBoard, -1);
-
+        String choosenBlock;
         for (int j = 0; j < 8; j++)
         {
             for (int i = 0; i < 8; i++)
             {
-                if (Rules.isPossible(-1, makeCode(j, i)));
+                choosenBlock = makeCode(j, i);
+                if (Rules.isPossible(-1, choosenBlock))
                 {
                     whiteBlocksRank.put(makeCode(j, i), 0);
                 }
@@ -117,38 +140,64 @@ public class Bot extends Player
         gameBoard.reset();
     }
 
+
+    // this method calculate the block rank
     private void whiteBlocksRanking()
     {
         int x, y, rank;
         for (String whiteBlock: whiteBlocksRank.keySet())
         {
-            x = deCode(whiteBlock, 'X');
-            y = deCode(whiteBlock, 'Y');
+            x = deCode(whiteBlock, 'X') + 1;
+            y = deCode(whiteBlock, 'Y') + 1;
+        
+            if (x > 3)
+                x = 8 - x; 
+            
+            if (y > 3)
+                y = 8 - y;
 
-            rank = 16 - (y + x) - (Math.abs(y - x));
+            rank = 16 - (y + x) - (2 * (Math.abs(y - x)));
 
             whiteBlocksRank.replace(whiteBlock, 0, rank);
         }
     }
 
+
+    // this method reset the rank of the blocks
     private void reset()
     {
         for (String whiteBlock: whiteBlocksRank.keySet())
         {
-            whiteBlocksRank.replace(whiteBlock, whiteBlocksRank.get(whiteBlock), 0);
+            whiteBlocksRank.put(whiteBlock, -1);
         }
 
         Rules.reset(-1);
     }
 
-    public void botChoose(Board gameBoard)
-    {
-        if (Rules.isPassed(this))
-            return;
 
+    /**
+     * This mehtod make the bot choose
+     * 
+     * @param gameBoard : the board of the game
+     * @return the bot gained score
+     * 
+     * @see Rules#applyChoose(Board, int, String)
+     */
+    public int botChoose(Board gameBoard)
+    {
+        // reset the board
+        Rules.reset(-1);
+        Rules.findSelectableBlocks(gameBoard, -1);
+
+        // check that bot can choose any block or not
+        if (Rules.isPassed(this))
+             return 0;  
+
+        // the bot thinking part =)        
         findWhiteBlocks(gameBoard);
         whiteBlocksRanking();
 
+        // bot make its choose
         String choosenBlock = null;
         for (String whiteBlock : whiteBlocksRank.keySet())
         {
@@ -162,8 +211,10 @@ public class Bot extends Player
                 choosenBlock = whiteBlock;
         }
 
-        Rules.applyChoose(gameBoard, -1, choosenBlock);
-
-       reset(); 
+        // reset the bot selectable blocks rank
+        reset(); 
+        
+        // return the bot gained score
+        return Rules.applyChoose(gameBoard, -1, choosenBlock);
     }
 }
