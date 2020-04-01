@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 
 /**
+ * The Main class of the game
+ * 
  * @author Mohammad Mahdi Malmasi
  * @version 0.2.0
  */
