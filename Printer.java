@@ -5,7 +5,7 @@ import java.util.Scanner;
  * This class do all required prints
  * 
  * @author Mohammad Mahdi Malmsi
- * @version 0.1.0
+ * @version 0.1.2
  */
 public class Printer
 {
