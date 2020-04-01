@@ -5,7 +5,7 @@ import java.util.Scanner;
  * The Main class of the game
  * 
  * @author Mohammad Mahdi Malmasi
- * @version 0.2.0
+ * @version 0.2.1
  */
 public class Run
 {
@@ -181,6 +181,7 @@ public class Run
                     }
 
                     // show the winner
+                    Printer.printVisualBoard(gameBoard.getVisualBoard(), gameBoard.getVisualY(), gameBoard.getVisualX());
                     Rules.winner(player1, player2, inputs);
 
                 break;
@@ -262,6 +263,11 @@ public class Run
                         player2.setScore(scoreDelta + player2.getScore());
                         player1.setScore(player1.getScore() - scoreDelta + 1);
                     }
+
+                    // show the winner
+                    Printer.printVisualBoard(gameBoard.getVisualBoard(), gameBoard.getVisualY(), gameBoard.getVisualX());
+                    Rules.winner(player1, player2, inputs);
+
                 break;
 
                 case 3: // exit
