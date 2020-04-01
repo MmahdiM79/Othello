@@ -88,6 +88,7 @@ public class Rules
                             break;
                         
                         playersSelectableBlocks.get(player).add("" + (y+1) + ((char) (x+65)));
+                        System.out.println("" + (y+1) + ((char) (x+65)));
                         gameBoard.changeBoard(y, x, 2);
                         return;
                     }
@@ -100,6 +101,7 @@ public class Rules
 
     public static boolean isPossible(int player, String choosenBlock)
     {
+        System.out.println(playersSelectableBlocks.get(player).toString());
         return playersSelectableBlocks.get(player).contains(choosenBlock);
     }
 
@@ -154,13 +156,13 @@ public class Rules
         int y = deCode(choosenBlock, 'Y');
         int x = deCode(choosenBlock, 'X');
 
-        System.out.println(y + " " + x);
 
         gameBoard.changeBoard(y, x, player);
         gainedScore++;
 
 
         int j, increasement_j, i, increasement_i;
+        boolean check = false;
 
         for (int J = -1; J < 2; J++)
             for (int I = -1; I < 2; I++)
@@ -170,17 +172,63 @@ public class Rules
 
                 j = J; 
                 i = I;
-                while (isInRange(y+j, x+i) && gameBoard.getMainBoard()[y+j][x+i] == (-player))
+                while(isInRange(y+j, x+i))
                 {
-                    gameBoard.changeBoard(y+j, x+i, player);
-                    gainedScore++;
+                    System.out.println("in while");
 
                     j += increasement_j;
                     i += increasement_i;
+
+                    if (!isInRange(y+j, x+i))
+                        continue;
+
+                    if (gameBoard.getMainBoard()[y+j][x+i] == player)
+                    {
+                        System.out.println(j + " " + i);
+                        check = true;
+                        break;
+                    }
                 }
+
+
+                if (check)
+                {
+                    j = J; 
+                    i = I;
+                    while (isInRange(y+j, x+i) && gameBoard.getMainBoard()[y+j][x+i] == (-player))
+                    {
+                        gameBoard.changeBoard(y+j, x+i, player);
+                        gainedScore++;
+
+                        j += increasement_j;
+                        i += increasement_i;
+                    }
+                }
+
+                check = false;
             }
 
         
         return gainedScore;
+     }
+
+     public static boolean isGameEnded(Board gameBoard)
+     {
+         findSelectableBlocks(gameBoard, 1);
+         gameBoard.reset();
+
+         findSelectableBlocks(gameBoard, -1);
+         gameBoard.reset();
+
+
+
+        int check = playersSelectableBlocks.get(1).size() + playersSelectableBlocks.get(-1).size();
+        reset(1);
+        reset(-1);
+    
+        if (check == 0)
+            return true;
+
+        return false;
      }
 }
