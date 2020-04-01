@@ -12,7 +12,7 @@ public class Printer
 
 
     // Reset the color of the terminal
-   private static final String RESET = "\033[0m"; 
+   private static final String RESET = "\033[92;40m"; 
 
    // indent
    private static final String indent = "\t\t\t\t  ";
@@ -56,9 +56,10 @@ public class Printer
      */
     public static void printVisualBoard(char[][] visualBoard, int y_len, int x_len)
     {
-        System.out.print(indent);
+        clear();
 
 
+        System.out.print(indent + BLACK_BACKGROUND_BRIGHT);
         System.out.print("      ");
         for (char k = 'A'; k <= 'H'; k++)
             System.out.print(YELLOW_BRIGHT + k + "      ");
@@ -95,7 +96,7 @@ public class Printer
                 else
                     System.out.print(visualBoard[j][i]);
 
-                System.out.print(RESET);
+                System.out.print(RESET + BLACK_BACKGROUND_BRIGHT);
             }
 
             System.out.print("\n");
@@ -103,26 +104,40 @@ public class Printer
     }
 
 
-    public static void printWrongChoose(Scanner finish)
+    private static void finishEnter(Scanner inputsSource)
     {
-        System.out.println(indent + 
-                            "\t     " + 
-                                YELLOW_BACKGROUND_BRIGHT + 
-                                    RED_BRIGHT + "<@ ! YOU CAN NOT CHOOSE THAT BLOCK ! @>" + RESET);
-
         System.out.println(indent + "\t\t    " + "(press enter to continue)");
-        finish.nextLine();
+        inputsSource.nextLine();
+    }
+
+    public static void wrongChooseError(Scanner finish)
+    {
+        System.out.println(indent + "\t     " + 
+                                YELLOW_BACKGROUND_BRIGHT + RED_BRIGHT + 
+                                        "<@ ! YOU CAN NOT CHOOSE THAT BLOCK ! @>" + RESET);
+
+        finishEnter(finish);
+    }
+
+    public static void inValidInputError(Scanner finish)
+    {
+        System.out.println(indent + "\t         " + 
+                                YELLOW_BACKGROUND_BRIGHT + RED_BRIGHT +
+                                            "<@ ! YOUR INPUT IS INVALID ! @>" + RESET);
+        finishEnter(finish);
     }
 
 
     public static void printTurn(Player player)
     {
-        System.out.print("Hey " + player.getFirstName() + " it's your turn. choose a block: ");
+        System.out.print(BLACK_BACKGROUND_BRIGHT + GREEN_BRIGHT + 
+                    "Hey " + player.getFirstName() + " it's your turn. choose a block from white blocks: ");
     }
 
     public static void printMenu()
     {
         clear();
+        System.out.println(RESET);
 
         System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println(indent + "\t\t  " + "🔵 <@~~~ Othello Game ~~~@> 🔴");
@@ -134,11 +149,22 @@ public class Printer
         System.out.print("\n");
         System.out.println(indent + "\t\t  " + "            5. exit");
         System.err.println(indent + "\t\t  " + "🔴 <@~~~~~~~~~~~~~~~~~~~~~@> 🔵");
+        System.out.print("\n\n");
+        System.out.print(  indent + "\t\t  " + "             0_0? ");
     }
 
     private static void clear()
     {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    public static void getPlayerName(int playerID)
+    {
+        clear();
+
+        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.print(indent + "\t  " + 
+                    "Please type the name of the player" + playerID +":  ");
     }
 }
