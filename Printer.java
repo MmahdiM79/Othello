@@ -2,8 +2,10 @@ import java.util.Scanner;
 
 
 /**
+ * This class do all required prints
+ * 
  * @author Mohammad Mahdi Malmsi
- * @version 0.0.7
+ * @version 0.1.0
  */
 public class Printer
 {
@@ -59,7 +61,7 @@ public class Printer
         clear();
 
 
-        System.out.print(indent + BLACK_BACKGROUND_BRIGHT);
+        System.out.print(indent + RESET);
         System.out.print("      ");
         for (char k = 'A'; k <= 'H'; k++)
             System.out.print(YELLOW_BRIGHT + k + "      ");
@@ -96,7 +98,7 @@ public class Printer
                 else
                     System.out.print(visualBoard[j][i]);
 
-                System.out.print(RESET + BLACK_BACKGROUND_BRIGHT);
+                System.out.print(RESET);
             }
 
             System.out.print("\n");
@@ -104,12 +106,19 @@ public class Printer
     }
 
 
+    // this method wait until player push 'enter' bottom
     private static void finishEnter(Scanner inputsSource)
     {
         System.out.println(indent + "\t\t    " + "(press enter to continue)");
         inputsSource.nextLine();
     }
 
+
+    /**
+     * This method warn the player that his/her choosen block is in valid
+     * 
+     * @param finish : the player input source
+     */
     public static void wrongChooseError(Scanner finish)
     {
         System.out.println(indent + "\t     " + 
@@ -119,6 +128,12 @@ public class Printer
         finishEnter(finish);
     }
 
+
+    /**
+     * This method warn the player that his/her input is in valid
+     * 
+     * @param finish : the player input source
+     */
     public static void inValidInputError(Scanner finish)
     {
         System.out.println(indent + "\t         " + 
@@ -128,12 +143,50 @@ public class Printer
     }
 
 
-    public static void printTurn(Player player)
+    /**
+     * This method tells to player that he/she can't choose any block
+     * 
+     * @param finish : the player input source
+     */
+    public static void passedPlayer(Scanner finish)
     {
-        System.out.print(BLACK_BACKGROUND_BRIGHT + GREEN_BRIGHT + 
-                    "Hey " + player.getFirstName() + " it's your turn. choose a block from white blocks: ");
+        System.out.println(indent + "\t       " + 
+                                "You Can Not Choose Any Block :( (pass)" + RESET);
+        finishEnter(finish);
     }
 
+
+    /**
+     * This method print the player name and some other words to get player choosen block
+     * 
+     * @param player : the player that should choose a block
+     */
+    public static void printTurn(Player player)
+    {
+        System.out.print(RESET + 
+                    "Hey " + BLACK_BACKGROUND_BRIGHT +  player.getFirstName() + RESET + 
+                            " it's your turn. choose a block from white blocks: ");
+    }
+
+
+    /**
+     * This mehtod print the players scores
+     * 
+     * @param player1 : player one
+     * @param player2 : player two
+     */
+    public static void printPlayersScores(Player player1, Player player2)
+    {
+        System.out.println(indent + WHITE_BRIGHT + "\t             " + 
+                                player1.getFirstName() + ": " + player1.getScore() +
+                                ",   " +
+                                player2.getFirstName() + ": " + player2.getScore() + RESET);
+    }
+
+
+    /**
+     * This method print the game menu
+     */
     public static void printMenu()
     {
         clear();
@@ -144,21 +197,27 @@ public class Printer
         System.out.print("\n\n");
         System.out.println(indent + "\t\t  " + "    1. new Two Player game");
         System.out.println(indent + "\t\t  " + "   2. new Single Player game");
-        System.out.println(indent + "\t\t  " + "        3. game Rules");
-        System.out.println(indent + "\t\t  " + "            4. help");
         System.out.print("\n");
-        System.out.println(indent + "\t\t  " + "            5. exit");
+        System.out.println(indent + "\t\t  " + "            3. exit");
         System.err.println(indent + "\t\t  " + "🔴 <@~~~~~~~~~~~~~~~~~~~~~@> 🔵");
         System.out.print("\n\n");
         System.out.print(  indent + "\t\t  " + "             0_0? ");
     }
 
+
+    // this method clear the terminal
     private static void clear()
     {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
+
+    /**
+     * This method ask the player name
+     * 
+     * @param playerID : the player number
+     */
     public static void getPlayerName(int playerID)
     {
         clear();
@@ -166,5 +225,22 @@ public class Printer
         System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.print(indent + "\t  " + 
                     "Please type the name of the player" + playerID +":  ");
+    }
+
+
+    /**
+     * This method says congratulations to winner player =)
+     * 
+     * @param winnePlayer : the winner player
+     * @param finish : the input source
+     */
+    public static void printWinner(Player winnePlayer, Scanner finish)
+    {
+        System.out.println(indent + "\t         " +
+                            "Congratulations " + 
+                                BLACK_BACKGROUND_BRIGHT + winnePlayer.getFirstName() + RESET +
+                                    ". you win !");
+
+        finishEnter(finish);
     }
 }
