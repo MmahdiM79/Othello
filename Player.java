@@ -1,8 +1,15 @@
 
 
 /**
+ * This class repersent a player int Run class
+ * it holds the player score, ID and player character
+ * 
+ * its extends from the person class
+ * 
+ * 
+ * 
  * @author Mohammad Mahdi Malmasi
- * @version 0.0.2
+ * @version 0.1.0
  */
 public class Player extends Person
 {
