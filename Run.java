@@ -5,7 +5,7 @@ import java.util.Scanner;
  * The Main class of the game
  * 
  * @author Mohammad Mahdi Malmasi
- * @version 0.2.1
+ * @version 0.2.2
  */
 public class Run
 {
@@ -25,6 +25,11 @@ public class Run
 
     public static void main(String[] args) 
     {
+        // calibrater the font size of the terminal screen
+        Printer.calibrate(inputs);
+
+
+
         // initialization classes and needed variables
         Rules.initialization();
         Board gameBoard = new Board();
