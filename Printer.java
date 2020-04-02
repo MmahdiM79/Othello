@@ -5,7 +5,7 @@ import java.util.Scanner;
  * This class do all required prints
  * 
  * @author Mohammad Mahdi Malmsi
- * @version 0.1.2
+ * @version 0.1.4
  */
 public class Printer
 {
@@ -241,6 +241,23 @@ public class Printer
                                 BLACK_BACKGROUND_BRIGHT + winnePlayer.getFirstName() + RESET +
                                     ". you win !");
 
+        finishEnter(finish);
+    }
+
+    /**
+     * This mehtod calibrate the font size of the terminal
+     * 
+     * @param finish : the players input source
+     */
+    public static void calibrate(Scanner finish)
+    {
+        clear();
+
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println(RESET + indent + 
+                                "please use (cntrl, +) and (cntrl, -) to fit this line to your screen");
+
+        System.out.println("<~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>");
         finishEnter(finish);
     }
 }
