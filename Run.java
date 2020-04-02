@@ -280,6 +280,10 @@ public class Run
                 case 3: // exit
                     return;
             }
+
+            gameBoard = new Board();
+            Rules.reset(1);
+            Rules.reset(-1);
         }
     }
 
