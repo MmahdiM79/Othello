@@ -5,7 +5,7 @@ import java.util.Scanner;
  * This class do all required prints
  * 
  * @author Mohammad Mahdi Malmsi
- * @version 0.1.4
+ * @version 0.1.5
  */
 public class Printer
 {
@@ -164,8 +164,8 @@ public class Printer
     public static void printTurn(Player player)
     {
         System.out.print(RESET + 
-                    "Hey " + BLACK_BACKGROUND_BRIGHT +  player.getFirstName() + RESET + 
-                            " it's your turn. choose a block from white blocks: ");
+                    "  Hey " + BLACK_BACKGROUND_BRIGHT +  player.getFirstName() + RESET + 
+                            " it's your turn. choose a block from white blocks(example: '3D'. no space between integer and character): ");
     }
 
 
