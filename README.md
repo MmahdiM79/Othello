@@ -1,5 +1,4 @@
-# Othello
+# Othello(Reversi)
 
-a simple implementation of Othello in Java.
-<@ !!!! THIS GAME DESINGHED FOR UNIX BASH !!!! @>
-<@ !!!! DO NOT USE WNIDOWS OS TO COMPILE AND RUN IT !!!! @>
+Othello or Reversi is a strategy board game for two players, played on an 8×8 uncheckered board. It was invented in 1883. Othello, a variant with a change to the board's initial setup, was patented in 1971.
+[(read more)](https://en.wikipedia.org/wiki/Reversi)
