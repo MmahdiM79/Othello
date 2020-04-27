@@ -38,13 +38,13 @@ So pull requests are welcome for this parts or other changes that make it better
 
 
 ### A quick overview of classes:
-    * *Run*: the main class of the game (includes main method)
-    * *Rules*: for check the game rules and apply players chooses
-    * *Printer*: do all required outputs in terminal
-    * *Board*: the board of the game
-    * *Person*: hold the information of players
-    * *Player*: hold player score, character and ID
-    * *Bot*: a simple AI. plays instead of player2 in single player mode 
+    * **Run**: the main class of the game (includes main method)
+    * **Rules**: for check the game rules and apply players chooses
+    * **Printer**: do all required outputs in terminal
+    * **Board**: the board of the game
+    * **Person**: hold the information of players
+    * *Player**: hold player score, character and ID
+    * **Bot**: a simple AI. plays instead of player2 in single player mode 
 
 
 
