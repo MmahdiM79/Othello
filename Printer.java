@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 /**
  * This class do all required prints
+ * This class only work on UNIX bash
  * 
  * @author Mohammad Mahdi Malmsi
  * @version 0.1.5
@@ -106,14 +107,6 @@ public class Printer
     }
 
 
-    // this method wait until player push 'enter' bottom
-    private static void finishEnter(Scanner inputsSource)
-    {
-        System.out.println(indent + "\t\t    " + "(press enter to continue)");
-        inputsSource.nextLine();
-    }
-
-
     /**
      * This method warn the player that his/her choosen block is in valid
      * 
@@ -122,13 +115,13 @@ public class Printer
     public static void wrongChooseError(Scanner finish)
     {
         System.out.println(indent + "\t     " + 
-                                YELLOW_BACKGROUND_BRIGHT + RED_BRIGHT + 
-                                        "<@ ! YOU CAN NOT CHOOSE THAT BLOCK ! @>" + RESET);
-
+        YELLOW_BACKGROUND_BRIGHT + RED_BRIGHT + 
+        "<@ ! YOU CAN NOT CHOOSE THAT BLOCK ! @>" + RESET);
+        
         finishEnter(finish);
     }
-
-
+    
+    
     /**
      * This method warn the player that his/her input is in valid
      * 
@@ -137,12 +130,12 @@ public class Printer
     public static void inValidInputError(Scanner finish)
     {
         System.out.println(indent + "\t         " + 
-                                YELLOW_BACKGROUND_BRIGHT + RED_BRIGHT +
-                                            "<@ ! YOUR INPUT IS INVALID ! @>" + RESET);
+        YELLOW_BACKGROUND_BRIGHT + RED_BRIGHT +
+        "<@ ! YOUR INPUT IS INVALID ! @>" + RESET);
         finishEnter(finish);
     }
-
-
+    
+    
     /**
      * This method tells to player that he/she can't choose any block
      * 
@@ -151,11 +144,11 @@ public class Printer
     public static void passedPlayer(Scanner finish)
     {
         System.out.println(indent + "\t       " + 
-                                "You Can Not Choose Any Block :( (pass)" + RESET);
+        "You Can Not Choose Any Block :( (pass)" + RESET);
         finishEnter(finish);
     }
-
-
+    
+    
     /**
      * This method print the player name and some other words to get player choosen block
      * 
@@ -164,11 +157,11 @@ public class Printer
     public static void printTurn(Player player)
     {
         System.out.print(RESET + 
-                    "  Hey " + BLACK_BACKGROUND_BRIGHT +  player.getFirstName() + RESET + 
-                            " it's your turn. choose a block from white blocks(example: '3D'. no space between integer and character): ");
+        "  Hey " + BLACK_BACKGROUND_BRIGHT +  player.getFirstName() + RESET + 
+        " it's your turn. choose a block from white blocks(example: '3D'. no space between integer and character): ");
     }
-
-
+    
+    
     /**
      * This mehtod print the players scores
      * 
@@ -178,12 +171,12 @@ public class Printer
     public static void printPlayersScores(Player player1, Player player2)
     {
         System.out.println(indent + WHITE_BRIGHT + "\t             " + 
-                                player1.getFirstName() + ": " + player1.getScore() +
-                                ",   " +
-                                player2.getFirstName() + ": " + player2.getScore() + RESET);
+        player1.getFirstName() + ": " + player1.getScore() +
+        ",   " +
+        player2.getFirstName() + ": " + player2.getScore() + RESET);
     }
-
-
+    
+    
     /**
      * This method print the game menu
      */
@@ -191,7 +184,7 @@ public class Printer
     {
         clear();
         System.out.println(RESET);
-
+        
         System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println(indent + "\t\t  " + "🔵 <@~~~ Othello Game ~~~@> 🔴");
         System.out.print("\n\n");
@@ -203,16 +196,8 @@ public class Printer
         System.out.print("\n\n");
         System.out.print(  indent + "\t\t  " + "             0_0? ");
     }
-
-
-    // this method clear the terminal
-    private static void clear()
-    {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
-
+    
+    
     /**
      * This method ask the player name
      * 
@@ -221,13 +206,13 @@ public class Printer
     public static void getPlayerName(int playerID)
     {
         clear();
-
+        
         System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.print(indent + "\t  " + 
-                    "Please type the name of the player" + playerID +":  ");
+        "Please type the name of the player" + playerID +":  ");
     }
-
-
+    
+    
     /**
      * This method says congratulations to winner player =)
      * 
@@ -237,13 +222,13 @@ public class Printer
     public static void printWinner(Player winnePlayer, Scanner finish)
     {
         System.out.println(indent + "\t         " +
-                            "Congratulations " + 
-                                BLACK_BACKGROUND_BRIGHT + winnePlayer.getFirstName() + RESET +
-                                    ". you win !");
-
+        "Congratulations " + 
+        BLACK_BACKGROUND_BRIGHT + winnePlayer.getFirstName() + RESET +
+        ". you win !");
+        
         finishEnter(finish);
     }
-
+    
     /**
      * This mehtod calibrate the font size of the terminal
      * 
@@ -252,12 +237,32 @@ public class Printer
     public static void calibrate(Scanner finish)
     {
         clear();
-
+        
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println(RESET + indent + 
-                                "please use (cntrl, +) and (cntrl, -) to fit this line to your screen");
-
+        "please use (cntrl, +) and (cntrl, -) to fit this line to your screen");
+        
         System.out.println("<~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>");
         finishEnter(finish);
+    }
+
+
+
+
+
+
+    // this method wait until player push 'enter' bottom
+    private static void finishEnter(Scanner inputsSource)
+    {
+        System.out.println(indent + "\t\t    " + "(press enter to continue)");
+        inputsSource.nextLine();
+    }
+
+    
+    // this method clear the terminal
+    private static void clear()
+    {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

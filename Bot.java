@@ -10,10 +10,14 @@ import java.util.HashMap;
  */
 public class Bot extends Player
 {
+            /*  Feilds  */
+
     // the blocks that bot can choose
     // rank is an int that make difrence between selectable blocks
     // the bot will chose the higher rank
     private HashMap<String, Integer> whiteBlocksRank;
+
+
 
 
 
@@ -26,8 +30,60 @@ public class Bot extends Player
     public Bot()
     {
         super("BOT", "", 0, -1, 'O', "");
-
+        
         whiteBlocksRank = new HashMap<>();
+    }
+    
+    
+    
+    
+    
+    
+    
+
+            /*  Methods  */
+
+    /**
+     * This mehtod make the bot choose
+     * 
+     * @param gameBoard : the board of the game
+     * @return the bot gained score
+     * 
+     * @see Rules#applyChoose(Board, int, String)
+     */
+    public int botChoose(Board gameBoard)
+    {
+        // reset the board
+        Rules.reset(-1);
+        Rules.findSelectableBlocks(gameBoard, -1);
+
+        // check that bot can choose any block or not
+        if (Rules.isPassed(this))
+             return 0;  
+
+        // the bot thinking part =)        
+        findWhiteBlocks(gameBoard);
+        whiteBlocksRanking();
+
+        // bot make its choose
+        String choosenBlock = null;
+        for (String whiteBlock : whiteBlocksRank.keySet())
+        {
+            if (choosenBlock == null)
+            {
+                choosenBlock = whiteBlock;
+                continue;
+            }
+
+            if (whiteBlocksRank.get(choosenBlock) < whiteBlocksRank.get(whiteBlock))
+                choosenBlock = whiteBlock;
+        }
+
+        // reset the bot selectable blocks rank
+        reset(); 
+        
+        // return the bot gained score
+        return Rules.applyChoose(gameBoard, -1, choosenBlock);
     }
 
 
@@ -172,49 +228,5 @@ public class Bot extends Player
         }
 
         Rules.reset(-1);
-    }
-
-
-    /**
-     * This mehtod make the bot choose
-     * 
-     * @param gameBoard : the board of the game
-     * @return the bot gained score
-     * 
-     * @see Rules#applyChoose(Board, int, String)
-     */
-    public int botChoose(Board gameBoard)
-    {
-        // reset the board
-        Rules.reset(-1);
-        Rules.findSelectableBlocks(gameBoard, -1);
-
-        // check that bot can choose any block or not
-        if (Rules.isPassed(this))
-             return 0;  
-
-        // the bot thinking part =)        
-        findWhiteBlocks(gameBoard);
-        whiteBlocksRanking();
-
-        // bot make its choose
-        String choosenBlock = null;
-        for (String whiteBlock : whiteBlocksRank.keySet())
-        {
-            if (choosenBlock == null)
-            {
-                choosenBlock = whiteBlock;
-                continue;
-            }
-
-            if (whiteBlocksRank.get(choosenBlock) < whiteBlocksRank.get(whiteBlock))
-                choosenBlock = whiteBlock;
-        }
-
-        // reset the bot selectable blocks rank
-        reset(); 
-        
-        // return the bot gained score
-        return Rules.applyChoose(gameBoard, -1, choosenBlock);
     }
 }

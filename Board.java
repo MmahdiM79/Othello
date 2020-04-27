@@ -152,6 +152,15 @@ public class Board
     }
 
 
+
+
+
+
+
+
+
+
+    
     // this method make changes in visual board
     // this method used in changeBoard
     private void applyToVisualBoard(int y, int x, char player)
